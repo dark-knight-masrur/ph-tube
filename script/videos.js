@@ -4,11 +4,11 @@ console.log('lets do for something videos');
 //1. fetch, load and show videos on html
 
 //create load catagories
-const loadVideos = () => {
+const loadVideos = (searchText = "") => {
 
     //fetch the data
 
-    fetch('https://openapi.programming-hero.com/api/phero-tube/videos')
+    fetch(`https://openapi.programming-hero.com/api/phero-tube/videos?title=${searchText}`)
         .then((res) => res.json())
         .then((data) => displayVideos(data.videos))
         .catch((error) => console.log(error)
@@ -72,7 +72,7 @@ ${video.authors[0].verified == true ?
                 `<img src="../assests/verified icon.png"/ class="h-4 w-4">
 ` : ""}
             </div >
-    <p >${video.others}</p>
+    <p ><button class="btn btn-sm btn-error">Details</button></p>
         </div >
     
   </div >

@@ -14,13 +14,31 @@ const loadCategories = () => {
         )
 }
 
+// remove all active calss?
+
+const removeAllActiveClass = () => {
+    const buttons = document.getElementsByClassName('btn-category')
+
+    for (let btn of buttons) {
+        btn.classList.remove('active')
+    }
+}
+
 //load videos by id
 const loadCategoryVideo = (id) => {
     // alert(id);
 
     fetch(`https://openapi.programming-hero.com/api/phero-tube/category/${id}`)
         .then((res) => res.json())
-        .then((data) => displayVideos(data.category))
+        .then((data) => {
+            // remove all active btn first 
+            removeAllActiveClass();
+
+
+            const activeBtn = document.getElementById(`btn-${id}`)
+            activeBtn.classList.add('active')
+            displayVideos(data.category)
+        })
         .catch((error) => console.log(error)
         )
 
@@ -47,5 +65,7 @@ const displayCategories = (categories) => {
 
     });
 }
+
+
 
 loadCategories()
